@@ -1,7 +1,15 @@
-import { MongoClient } from 'mongodb';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-export const client = new MongoClient(process.env.MONGO_URI);
-export const db = client.db('Netflix');
+export const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log('✅ Conectado a la base Netflix');
+    } catch (err) {
+        console.error('❌ Error de conexión:', err.message);
+        process.exit(1);
+    }
+};
+

@@ -1,21 +1,29 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { client } from './ddbb/db.js';
-import seriesRoutes from './routes/series.js';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import { connectDB } from './ddbb/db.js';
+import usersRouter from './routes/usersRouter.js';
+import seriesRouter from './routes/seriesRouter.js';
+
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors());
-app.use('/api/series', seriesRoutes);
+app.use(cookieParser());
+app.use(cors({
+    origin: 'http://localhost:5001',
+    credentials: true,
+}));
 
-client.connect().then(() => {
+// Rutas por colección
+app.use('/api/users', usersRouter);
+app.use('/api/series', seriesRouter);
+console.log("MongoDB uri: ", process.env.MONGO_URI)
+connectDB().then(() => {
     app.listen(PORT, () => {
         console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
     });
-}).catch(err => {
-    console.error('❌ Error al conectar con MongoDB:', err);
 });

@@ -1,0 +1,37 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=WebStorm
+
+###
+
+### Registro de usuario
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+  "name": " ",
+  "email": " ",
+  "password": " ",
+  "confirmPassword": " ",
+  "role": "USER"
+}
+###
+
+
+###
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "petru@example.com",
+  "password": "123456"
+}
+###
+
+###
+GET http://localhost:5000/api/series?query=Dune
+###
+
+###
+GET http://localhost:5000/api/users/profile
+Aurotization: Beared eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YjQ1NzBhZTdhYzY3M2E5OGM3OTkyZCIsImlhdCI6MTc1NjY1MTM3OSwiZXhwIjoxNzU2NjU0OTc5fQ.7_fxYPJJxP_vp3aVCfh4ITNovx2KTcS7KMDWafwA5oA
